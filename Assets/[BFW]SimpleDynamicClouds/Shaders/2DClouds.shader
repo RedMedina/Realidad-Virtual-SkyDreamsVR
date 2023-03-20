@@ -9,6 +9,7 @@ Shader "FStarVR/2DClouds" {
 		_ScatterMap1 ("Scatter Map 2", 2D) = "white" {}
 		_DensityMap ("Density Map", 2D) = "white" {}
 		_TextureMap ("Texture Map", 2D) = "white" {}
+		_TransitionDuration("Transition Duration", Range(0.0, 1.0)) = 1.0
 	}
 
 	SubShader {
@@ -36,6 +37,8 @@ Shader "FStarVR/2DClouds" {
 			fixed4 _TextureMap_ST;
 			fixed _Speed;
 			fixed _Density;
+
+			uniform float _TransitionDuration;
 
 			struct appdata {
 				fixed4 vertex : POSITION;
@@ -69,7 +72,17 @@ Shader "FStarVR/2DClouds" {
 				fixed4 fbm = saturate(n0 + n1 + n2 + n3 - _Density);
 				col.a = saturate(fbm.xyz * _CloudColor.a * 2);
 
+				float3 darkBlue = float3(0.2, 0.2, 0.2);
+				float3 white = float3(1.0, 1.0, 1.0);
+				float3 orange = float3(1.0, 0.5, 0.0) * 1.5f;
+
+				float3 color = lerp(white, orange, 1 - _TransitionDuration);
+				color = lerp(color, darkBlue, 1 - _TransitionDuration);
+
+				_CloudColor.rgb = color;
+
 				col.rgb = _CloudColor.rgb;
+				//col.rgb = color;
 				return col;
 			}
 			ENDCG
