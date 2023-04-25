@@ -39,13 +39,4 @@ public class Player_Movement : MonoBehaviour
             rb.MovePosition(transform.position + moveDirection * speed * Time.deltaTime);
         }
     }
-
-    void FixedUpdate()
-    {
-        // Move the player based on the parent object's movement
-        if (transform.parent != null)
-        {
-            rb.MovePosition(transform.position + transform.parent.GetComponent<Rigidbody>().velocity * Time.fixedDeltaTime);
-        }
-    }
 }

@@ -80,7 +80,7 @@ public class Day_Night_Cycle : MonoBehaviour
         sol.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, color, 0.25f);
         luna.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, color, 0.25f);
 
-        Debug.Log(ColorChange);
+        //Debug.Log(ColorChange);
         
     }
 }

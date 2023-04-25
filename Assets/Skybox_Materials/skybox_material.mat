@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 8900000, guid: 04e0527dab97af842b3f32b32fd2a10d, type: 3}
+        m_Texture: {fileID: 8900000, guid: 182ffbf54edc5694cb1e2639bf398629, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -57,7 +57,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SkyboxDay:
-        m_Texture: {fileID: 8900000, guid: 04e0527dab97af842b3f32b32fd2a10d, type: 3}
+        m_Texture: {fileID: 8900000, guid: 182ffbf54edc5694cb1e2639bf398629, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SkyboxNight:
@@ -69,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SunsetTex:
-        m_Texture: {fileID: 8900000, guid: 84470c0e3f447a84aadec4408e9cd614, type: 3}
+        m_Texture: {fileID: 8900000, guid: 68314cbe0af64f14ea6fdeaef6ae0675, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -90,7 +90,7 @@ Material:
     - _SrcBlend: 1
     - _SunIntensity: 0
     - _SunSize: 0.9
-    - _TransitionDuration: 0.35665834
+    - _TransitionDuration: 0.486781
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

@@ -353,8 +353,11 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Modelos/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/CTI_CustomWind.cs"
+"Assets/Modelos/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/CTI_Utils.cs"
 "Assets/Scripts/Basic_Scripts/Camera_Follow.cs"
 "Assets/Scripts/Basic_Scripts/Day_Night_Cycle.cs"
+"Assets/Scripts/Basic_Scripts/Frustrum_Culling.cs"
 "Assets/Scripts/Basic_Scripts/Player_Movement.cs"
 "Assets/Scripts/Globo_Script/Globo.cs"
 -langversion:9.0
