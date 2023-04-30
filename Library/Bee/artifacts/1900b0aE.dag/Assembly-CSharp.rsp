@@ -118,6 +118,7 @@
 -define:ENABLE_TILEMAP
 -define:ENABLE_TIMELINE
 -define:ENABLE_LEGACY_INPUT_MANAGER
+-define:UNITY_POST_PROCESSING_STACK_V2
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.15f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
@@ -330,6 +331,8 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Performance.Profile-Analyzer.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Postprocessing.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Postprocessing.Runtime.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Analytics.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Environments.ref.dll"
@@ -356,10 +359,22 @@
 "Assets/Modelos/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/CTI_CustomWind.cs"
 "Assets/Modelos/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Scripts/CTI_Utils.cs"
 "Assets/Scripts/Basic_Scripts/Camera_Follow.cs"
+"Assets/Scripts/Basic_Scripts/clouds.cs"
 "Assets/Scripts/Basic_Scripts/Day_Night_Cycle.cs"
 "Assets/Scripts/Basic_Scripts/Frustrum_Culling.cs"
 "Assets/Scripts/Basic_Scripts/Player_Movement.cs"
+"Assets/Scripts/FBX_Scripts/Fire_Sound.cs"
 "Assets/Scripts/Globo_Script/Globo.cs"
+"Assets/VLights/Scripts/Demo/MouseOrbitDemo.cs"
+"Assets/VLights/Scripts/PostProcess/VLightInterleavedSampling.cs"
+"Assets/VLights/Scripts/Util/GenerateNoiseTexture.cs"
+"Assets/VLights/Scripts/Util/ShaderLibrary.cs"
+"Assets/VLights/Scripts/Util/VLightGeometryUtil.cs"
+"Assets/VLights/Scripts/Util/VLightShaderUtil.cs"
+"Assets/VLights/Scripts/VLight/VLight.cs"
+"Assets/VLights/Scripts/VLight/VLightHelper.cs"
+"Assets/VLights/Scripts/VLight/VLightManager.cs"
+"Assets/VolClouds/Scripts/MainScene.cs"
 -langversion:9.0
 
 /deterministic
