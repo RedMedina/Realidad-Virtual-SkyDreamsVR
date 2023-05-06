@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Globo_Script\Globo.cs" />
     <Compile Include="Assets\VLights\Scripts\PostProcess\VLightInterleavedSampling.cs" />
     <Compile Include="Assets\Scripts\Basic_Scripts\Frustrum_Culling.cs" />
+    <Compile Include="Assets\Scripts\FBX_Scripts\Niebla.cs" />
     <Compile Include="Assets\Scripts\Basic_Scripts\Day_Night_Cycle.cs" />
     <Compile Include="Assets\Scripts\Basic_Scripts\Player_Movement.cs" />
     <Compile Include="Assets\Scripts\Basic_Scripts\Camera_Follow.cs" />

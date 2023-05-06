@@ -113,7 +113,7 @@ Material:
     - _SpecularHighlights: 1
     - _Speed: 0.15
     - _SrcBlend: 5
-    - _TransitionDuration: 0.76602334
+    - _TransitionDuration: 0.8225786
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:

@@ -364,6 +364,7 @@
 "Assets/Scripts/Basic_Scripts/Frustrum_Culling.cs"
 "Assets/Scripts/Basic_Scripts/Player_Movement.cs"
 "Assets/Scripts/FBX_Scripts/Fire_Sound.cs"
+"Assets/Scripts/FBX_Scripts/Niebla.cs"
 "Assets/Scripts/Globo_Script/Globo.cs"
 "Assets/VLights/Scripts/Demo/MouseOrbitDemo.cs"
 "Assets/VLights/Scripts/PostProcess/VLightInterleavedSampling.cs"

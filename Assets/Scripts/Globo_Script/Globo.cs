@@ -18,6 +18,9 @@ public class Globo : MonoBehaviour
     private float Tiempo=0;
     private int DireccionActual = -1;
 
+    private bool StationColl;
+    private bool TerrainColl;
+
     public enum Direcciones 
     {
         Left,
@@ -52,6 +55,8 @@ public class Globo : MonoBehaviour
        isMoving = true;
        alturaAnterior = transform.position.y;
        DireccionActual = GetRandomDirection(DireccionActual);
+       StationColl = false;
+       TerrainColl = false;
     }
 
     // Update is called once per frame
@@ -127,6 +132,37 @@ public class Globo : MonoBehaviour
                     }
                 }
 
+                if (transform.position.x > 450 || transform.position.x < -450 || transform.position.z > 450 || transform.position.z < -450) 
+                {
+                    switch (DireccionActual)
+                    {
+                        case (int)Direcciones.Left:
+                            DireccionActual = 1;
+                            break;
+                        case (int)Direcciones.Right:
+                            DireccionActual = 0;
+                            break;
+                        case (int)Direcciones.Foward:
+                            DireccionActual = 3;
+                            break;
+                        case (int)Direcciones.Back:
+                            DireccionActual = 2;
+                            break;
+                        default:
+                            break;
+                    }
+                    Debug.Log("Cambio Direccion Contraria: " + DireccionActual);
+                }
+                
+                if (StationColl && TerrainColl)
+                {
+                    Debug.Log("El objeto ha entrado en el trigger y en el collider al mismo tiempo");
+                }
+                else if (TerrainColl)
+                {
+                    Debug.Log("El objeto ha entrado solo en el collider");
+                }
+
                 DireccionDelViento(DireccionActual);
             }
         }
@@ -166,16 +202,24 @@ public class Globo : MonoBehaviour
         }
     }
 
+    
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Base_Station"))
+        {
+            StationColl = false;
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.CompareTag("Player"))
         {
             if (!isMoving)
             {
                 other.transform.position = transform.position;
                 other.transform.Translate(new Vector3(0, 0.7f, 0));
-                
+
                 colliders[0].isTrigger = false;
                 colliders[1].isTrigger = false;
                 colliders[2].isTrigger = false;
@@ -186,5 +230,25 @@ public class Globo : MonoBehaviour
             }
         }
 
+        if (other.gameObject.CompareTag("Base_Station"))
+        {
+            StationColl = true;
+        }
+    }
+   
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("terrain"))
+        {
+            TerrainColl = false;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("terrain"))
+        {
+            TerrainColl = true;
+        }
     }
 }
