@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO.Ports;
+using System.Threading;
 
 public class Globo : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class Globo : MonoBehaviour
     public float maxHeight = 100f;
     public float maxRight = -300f;
     public GameObject Player;
+    private SerialPort port;
+    private float Up;
 
     private bool isMoving = false;
     private bool MovUp = true;
@@ -57,13 +61,36 @@ public class Globo : MonoBehaviour
        DireccionActual = GetRandomDirection(DireccionActual);
        StationColl = false;
        TerrainColl = false;
+
+        try
+        {
+            port = new SerialPort();
+            port.PortName = "COM3";
+            port.BaudRate = 9600;
+            port.ReadTimeout = 500;
+            port.Open();
+        }
+        catch
+        {
+
+        }
+
+        Thread thread = new Thread(SerialCommunication);
+        thread.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
+        try
+        {
+            if (port.IsOpen)
+                port.WriteLine("1");
+        }catch { }
+        //Debug.Log(data);
 
-        float Up = Input.GetAxisRaw("Jump");
+        //float Up = Input.GetAxisRaw("Jump");
+
         transform.Translate(Vector3.up * Up * UpSpeed * Time.deltaTime);
 
         if (isMoving)
@@ -165,6 +192,35 @@ public class Globo : MonoBehaviour
 
                 DireccionDelViento(DireccionActual);
             }
+        }
+
+  
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (port != null || port.IsOpen)
+        {
+            port.Write("0");
+            port.Close();
+            Debug.Log("Close");
+        }
+    }
+
+    void SerialCommunication()
+    {
+        while (port.IsOpen)
+        {
+            string data = "";
+            try
+            {
+                data = port.ReadLine();
+                //Debug.Log(data);
+                Up = int.Parse(data);
+               
+
+            }
+            catch { }
         }
     }
 
