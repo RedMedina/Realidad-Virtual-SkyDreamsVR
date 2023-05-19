@@ -65,7 +65,7 @@ public class Globo : MonoBehaviour
         try
         {
             port = new SerialPort();
-            port.PortName = "COM3";
+            port.PortName = "COM4";
             port.BaudRate = 9600;
             port.ReadTimeout = 500;
             port.Open();
@@ -85,7 +85,7 @@ public class Globo : MonoBehaviour
         try
         {
             if (port.IsOpen)
-                port.WriteLine("1");
+                port.WriteLine(DireccionActual.ToString());
         }catch { }
         //Debug.Log(data);
 
@@ -201,7 +201,7 @@ public class Globo : MonoBehaviour
     {
         if (port != null || port.IsOpen)
         {
-            port.Write("0");
+            port.Write("\0");
             port.Close();
             Debug.Log("Close");
         }
