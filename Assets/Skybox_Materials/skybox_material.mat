@@ -90,7 +90,7 @@ Material:
     - _SrcBlend: 1
     - _SunIntensity: 0
     - _SunSize: 0.9
-    - _TransitionDuration: 0.82903606
+    - _TransitionDuration: 0.7952607
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

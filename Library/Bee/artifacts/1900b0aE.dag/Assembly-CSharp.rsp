@@ -559,6 +559,7 @@
 "Assets/Scripts/FBX_Scripts/Fire_Sound.cs"
 "Assets/Scripts/FBX_Scripts/Niebla.cs"
 "Assets/Scripts/Globo_Script/Globo.cs"
+"Assets/Scripts/Globo_Script/Palanca_Mov.cs"
 "Assets/Scripts/Start_Scene/Parallax_Cam.cs"
 "Assets/Scripts/Start_Scene/Start_Level.cs"
 "Assets/VLights/Scripts/Demo/MouseOrbitDemo.cs"
