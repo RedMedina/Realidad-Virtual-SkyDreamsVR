@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO.Ports;
+using System.Threading;
 
 public class Globo : MonoBehaviour
 {
@@ -9,19 +11,21 @@ public class Globo : MonoBehaviour
     public float maxHeight = 100f;
     public float maxRight = -300f;
     public GameObject Player;
+    private SerialPort port;
+    private float Up;
 
     private bool isMoving = false;
     private bool MovUp = true;
     private bool MovRight = true;
     private BoxCollider[] colliders;
     private Rigidbody rig;
-    private float Tiempo=0;
+    private float Tiempo = 0;
     private int DireccionActual = -1;
 
     private bool StationColl;
     private bool TerrainColl;
 
-    public enum Direcciones 
+    public enum Direcciones
     {
         Left,
         Right,
@@ -44,26 +48,50 @@ public class Globo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       colliders = gameObject.GetComponents<BoxCollider>();
-       rig = gameObject.GetComponent<Rigidbody>();
-       colliders[0].isTrigger = false;
-       colliders[1].isTrigger = false;
-       colliders[2].isTrigger = false;
-       colliders[3].isTrigger = false;
-       colliders[4].isTrigger = false;
-       colliders[5].isTrigger = false;
-       isMoving = true;
-       alturaAnterior = transform.position.y;
-       DireccionActual = GetRandomDirection(DireccionActual);
-       StationColl = false;
-       TerrainColl = false;
+        colliders = gameObject.GetComponents<BoxCollider>();
+        rig = gameObject.GetComponent<Rigidbody>();
+        colliders[0].isTrigger = false;
+        colliders[1].isTrigger = false;
+        colliders[2].isTrigger = false;
+        colliders[3].isTrigger = false;
+        colliders[4].isTrigger = false;
+        colliders[5].isTrigger = false;
+        isMoving = true;
+        alturaAnterior = transform.position.y;
+        DireccionActual = GetRandomDirection(DireccionActual);
+        StationColl = false;
+        TerrainColl = false;
+
+        try
+        {
+            port = new SerialPort();
+            port.PortName = "COM3";
+            port.BaudRate = 9600;
+            port.ReadTimeout = 500;
+            port.Open();
+        }
+        catch
+        {
+
+        }
+
+        Thread thread = new Thread(SerialCommunication);
+        thread.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
+        try
+        {
+            if (port.IsOpen)
+                port.WriteLine(DireccionActual.ToString());
+        }
+        catch { }
+        //Debug.Log(data);
 
-        float Up = Input.GetAxisRaw("Jump");
+        //float Up = Input.GetAxisRaw("Jump");
+
         transform.Translate(Vector3.up * Up * UpSpeed * Time.deltaTime);
 
         if (isMoving)
@@ -78,7 +106,7 @@ public class Globo : MonoBehaviour
                 MovUp = false;
                 rig.useGravity = true;
                 Tiempo += Time.deltaTime;
-                if(Tiempo >= TimeWindVariation) 
+                if (Tiempo >= TimeWindVariation)
                 {
                     DireccionActual = GetRandomDirection(DireccionActual);
                     Debug.Log("Tiempo: " + Tiempo + " Direccion: " + DireccionActual);
@@ -132,7 +160,7 @@ public class Globo : MonoBehaviour
                     }
                 }
 
-                if (transform.position.x > 450 || transform.position.x < -450 || transform.position.z > 450 || transform.position.z < -450) 
+                if (transform.position.x > 450 || transform.position.x < -450 || transform.position.z > 450 || transform.position.z < -450)
                 {
                     switch (DireccionActual)
                     {
@@ -153,7 +181,7 @@ public class Globo : MonoBehaviour
                     }
                     Debug.Log("Cambio Direccion Contraria: " + DireccionActual);
                 }
-                
+
                 if (StationColl && TerrainColl)
                 {
                     Debug.Log("El objeto ha entrado en el trigger y en el collider al mismo tiempo");
@@ -166,9 +194,38 @@ public class Globo : MonoBehaviour
                 DireccionDelViento(DireccionActual);
             }
         }
+
+
     }
 
-    int GetRandomDirection(int DirActual) 
+    private void OnApplicationQuit()
+    {
+        if (port != null || port.IsOpen)
+        {
+            port.Write("\0");
+            port.Close();
+            Debug.Log("Close");
+        }
+    }
+
+    void SerialCommunication()
+    {
+        while (port.IsOpen)
+        {
+            string data = "";
+            try
+            {
+                data = port.ReadLine();
+                //Debug.Log(data);
+                Up = int.Parse(data);
+
+
+            }
+            catch { }
+        }
+    }
+
+    int GetRandomDirection(int DirActual)
     {
         int Direccion = Random.Range(0, 4);
         while (Direccion == DirActual)
@@ -180,21 +237,21 @@ public class Globo : MonoBehaviour
         return DirActual;
     }
 
-    void DireccionDelViento(int DirActual) 
+    void DireccionDelViento(int DirActual)
     {
         switch (DirActual)
         {
             case (int)Direcciones.Left:
-                    transform.Translate(Vector3.left * speed * Time.deltaTime);
+                transform.Translate(Vector3.left * speed * Time.deltaTime);
                 break;
             case (int)Direcciones.Right:
-                    transform.Translate(Vector3.right * speed * Time.deltaTime);
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
                 break;
             case (int)Direcciones.Foward:
-                    transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
                 break;
             case (int)Direcciones.Back:
-                    transform.Translate(Vector3.back * speed * Time.deltaTime);
+                transform.Translate(Vector3.back * speed * Time.deltaTime);
                 break;
 
             default:
@@ -202,7 +259,7 @@ public class Globo : MonoBehaviour
         }
     }
 
-    
+
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Base_Station"))
@@ -235,7 +292,7 @@ public class Globo : MonoBehaviour
             StationColl = true;
         }
     }
-   
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("terrain"))
